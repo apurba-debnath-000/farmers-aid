@@ -1,0 +1,110 @@
+
+{% extends 'store/base.html' %}
+
+{% block weather_css %}
+
+{% include 'weather/a.html' %}
+
+
+{% endblock %}
+
+{% block content %}
+<style>
+    #id_name{
+        color: rgb(241, 237, 234);
+    }
+::placeholder{
+    color: rgb(241, 112, 172);
+}
+::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+  color: pink;
+}
+::-moz-placeholder { /* Firefox 19+ */
+  color: pink;
+}
+:-ms-input-placeholder { /* IE 10+ */
+  color: pink;
+}
+:-moz-placeholder { /* Firefox 18- */
+  color: rgb(245, 113, 135);
+}
+</style>
+
+<section class="hero is-primary" style=" margin-top: 15px; background-color: rgb(29, 28, 31);">
+    <div class="hero-body">
+        <div class="container"  >
+            <h1 class="title white-text">
+                What's the weather you like?
+            </h1>
+        </div>
+    </div>
+</section>
+<section class="section">
+    <div class="container" >
+        <div class="columns">
+            <div class="column is-offset-4 is-4">
+                <form method="POST">
+                    {% csrf_token %}
+                    <div class="field has-addons" >
+                        <div class="control is-expanded ">
+                           {{form.name}}
+                        </div>
+                        <div class="control">
+                            <button class="button is-info" style="margin-left: 20px;">
+                                Add City
+                            </button>
+                        </div>
+                    </div>
+                    
+                    {% if msg %}
+                    <div class="notification {{msgclass}}">
+                        {{msg}}
+                    </div>
+                    {% else %}
+
+                    {% endif %}
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="section">
+    <div class="container">
+        <div class="columns">
+            <div class="column is-offset-4 is-4">
+                {% for a in weather %}
+
+
+                <div class="box">
+                    <article class="media">
+                        <div class="media-left">
+                            <figure class="image is-50x50">
+                                <img src="http://openweathermap.org/img/w/{{a.icon}}.png" alt="Image">
+                            </figure>
+                        </div>
+                        <div class="media-content">
+                            <div class="content">
+                                <p>
+                                    <span class="title">{{a.city}}</span>
+                                    <br>
+                                    <span class="subtitle">{{a.temparature}}° F</span>
+                                    <br> {{a.description}}
+                                </p>
+                            </div>
+                        </div>
+                        <div class="media-right">
+                            <a href="{%url 'WeatherApp:city_remove' city_name=a.city%}">
+                             <button class='delete'></button>
+                            </a>
+                        </div>
+                    </article>
+                </div>
+                 {% endfor %}
+            </div>
+        </div>
+    </div>
+</section>
+<footer class="footer">
+</footer>
+
+{% endblock %}

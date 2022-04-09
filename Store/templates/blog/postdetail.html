@@ -1,0 +1,116 @@
+{% extends 'store/base.html' %}
+
+{% block content %}
+
+<!-- <section>
+    <div class="container">
+       
+        <div class="row text-center">
+            <div class="container mt-3">
+                <p style="color:tomato; font-family: 'Courier New', Courier, monospace; font-weight: bold; font-size: 40px;">
+                    Topic: {{post.title|safe}}</p>
+
+                    <h1>( {{post.cat.title}} )</h1>
+            </div>
+            <div class="col-xl-10 mx-auto"><img class="img-fluid mb-5"
+                    src="/abcd/show/{{post.image}}"
+                    alt=""></div>
+        </div>
+        <div class="row">
+            <div class="col-xl-8 col-lg-10 mx-auto">
+                <div class="text-content">
+                    {{post.content|safe}}
+                </div>
+            </div>
+        </div>
+    </div>
+</section> -->
+
+<style>
+    body{
+        background-image: url('');
+    }
+</style>
+<div class="custom-container">
+    <div class="row m-3">
+        <div class="col-lg-9 ">
+            <h1 style="font-size: 30px; color: rgb(17, 1, 1); font-family: Georgia, 'Times New Roman', Times, serif; text-align: center;text-decoration: underline;">{{post.title}}</h1>
+
+            <h6 style="color: rgb(17, 16, 15);">( {{post.cat.title}} )</h6>
+
+            <img src="/abcd/show/{{post.image}}" class="responsive-img" alt="" style="margin-left: 200px; " height="400" width="400">
+
+            <br>
+            <p style="color:darkred">
+                {{post.content | safe}}
+            </p>
+            <!--Comment-->
+            
+
+            <div class="col-lg-12">
+                <br>
+                <h3>Comments......</h3>
+                <hr><br>
+                
+                {% if not post.comments.all %}
+
+                <strong>No Comments Yet .....</strong> <a href="{% url 'add_comment' post.pk %}">Add Comment</a>
+
+                {% else %}
+                    {% for comment in post.comments.all%}
+                        <strong>
+                            {{forloop.counter}}.&nbsp; {{comment.name}} -
+                            {{comment.date_added}}
+                        </strong>
+                        <br>
+                            <p style="margin-left:20px;">{{comment.body}} </p>
+                        <hr>
+                        
+                        <!-- <div class="btn btn-outline-info col-lg-3 m-3 " style="background-color: crimson; margin-right: -20px;" >
+                            <a href="{% url 'delete_comment' comment.pk %}" style="color: aliceblue;">Delete Comment</a>     
+                        </div> -->
+                        
+                        
+                    {% endfor %}
+                    <hr>
+                    
+                    <a href="{% url 'add_comment' post.pk %}">Add Comment</a>
+                {% endif %}
+                <hr>
+                <br>
+            </div>
+        </div>
+        <div class="col-lg-3 m2">
+            {% for cat in cats %}
+
+            <div class="card item" style="margin-left:10px;">
+
+                <div class="img-container">
+
+                    <img src="/abcd/show/{{cat.image}}" class="responsive-img" alt="">
+
+                </div>
+                <div class="card-content">
+
+                    <b>
+                        {{cat.title}}
+                    </b>
+
+                    <p class="truncate">{{cat.description}}</p>
+                    <div class="container center-align mt20">
+                        <a href="/blog/category/{{cat.url}}" class="btn bg-primary">VIEW</a>
+                    </div>
+
+                </div>
+
+
+            </div>
+
+            {%endfor%}
+
+
+        </div>
+    </div>
+</div>
+
+{% endblock %}

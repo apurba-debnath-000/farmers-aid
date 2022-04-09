@@ -1,0 +1,35 @@
+{% extends 'store/base.html' %}
+
+<!-- {% load crispy_forms_tags %}
+{% load widget_tweaks %} -->
+
+{% block content %}
+
+
+
+<div class="container " style="border-style: outset; margin-top: 20px; background: rgb(0, 12, 17);  border: 30px solid rgb(2, 7, 71);
+border-radius: 5px; margin-bottom: 20px;">
+    <div class="p-3 m-3  ">
+        
+        <div class="col-lg-5 mx-auto border rounded pt-5 p-4 m-4  " style="background-color: rgb(3, 109, 104);">
+            <h5 class="alert alert-light text-light border rounded text-center " style="background-color: rgb(0, 111, 130);">Role of Registration:</h5>
+
+            
+                <div class="col-lg-10 m-3 mx-auto">
+                    <a class="btn btn-success  d-grid gap-2" href="{% url 'cus_reg' %}" role="button">Customer</a>
+                </div>
+
+                <div class="col-lg-10 m-3 mx-auto">
+                    <a class="btn btn-primary  d-grid gap-2" href="{% url 'fa_reg' %}" role="button">Farmer</a>
+                </div>
+
+                <div class="col-lg-10 m-3 mx-auto">
+                    <a class="btn btn-primary  d-grid gap-2" href="{% url 'agri_officer_reg' %}" role="button">Agri_Officer</a>
+                </div>
+           
+            
+        </div>
+    </div>
+</div>
+
+{% endblock %}

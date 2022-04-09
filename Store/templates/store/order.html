@@ -1,0 +1,122 @@
+{% extends 'store/base.html' %}
+{% block content %}
+{% load cart %}
+{% load custom_filter %}
+<div class="container">
+    <div class="border rounded p-4 m-4" style="background-color: rgb(226, 238, 245);">
+        <p class="display-4 pl-4 ml-4">Your Order:</p>
+        <hr>
+        <table class="table ">
+            <thead>
+                <tr>
+                    <th>Sno.</th>
+                    <th>Image</th>
+                    <th>Name</th>
+                    <th>Date</th>
+                    <th>Price</th>
+                    <th>Quantity</th>
+                    
+                    <th>Total</th>
+                    <th>Status</th>
+                    
+                </tr>
+            </thead>
+            <tbody>
+                {% for order in orders %}
+                <tr>
+                
+                    <td>{{forloop.counter}}</td>
+                    <td>
+
+                    <img src="{{order.product.image.url}}" alt="" style=" width:30px; height:30px; " >
+
+                    </td>
+                    <td> {{order.product.name}} </td>
+                    <td> {{order.date}} </td>
+
+                    <td> {{order.product.Unit_price|currency}} / {{order.unit}} </td>
+                    
+                    <td>{{order.quantity}}</td>
+                    
+                    <td>
+                        <span style="font-size: 18px; color:darkred">
+                            {{order.product.Unit_price|total_price_of_order:order.quantity|currency}}
+                        </span>
+                    </td>
+                    
+                        {% if order.status %}
+                        <td>
+                            <small class="badge bg-success p-2">
+                                Completed
+                            </small>
+                        </td> 
+                        {% else %}
+                        <td>
+                            <small class="badge bg-warning p-2">
+                                Pending
+                        </small>
+                        </td>
+                        {% endif %}
+
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+          
+        </table>
+        
+        <!--modal-->
+
+        
+    </div>
+</div>
+
+<!--model-->
+
+<!-- Button trigger modal -->
+
+
+<!-- Modal -->
+<!-- <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Checkout Form: </h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="p-3 m-3">
+          <form action="/check-out" method="POST">
+          {% csrf_token %}
+
+            <div class="form-group">
+              <label for="">Address</label>
+              <input type="text" name="address" id="" class="form-control" placeholder="Address" aria-describedby="helpId">
+              
+            </div>
+            <div class="form-group">
+              <label for="">Email</label>
+              <input type="email" name="email" id="" class="form-control" placeholder="xyz@email.com" aria-describedby="helpId">
+              
+            </div>
+            <div class="form-group">
+              <label for="">Phone</label>
+              <input type="text" name="phone" id="" class="form-control" placeholder="017-00000000" aria-describedby="helpId">
+              
+            </div>
+            <input type="submit" value="Checkout" class="btn btn-outline-info m-3" style="float: right;">
+
+          </form>
+
+        </div>
+      </div>
+     
+    </div>
+  </div>
+</div> -->
+
+        
+        
+        
+       
+{% endblock %}

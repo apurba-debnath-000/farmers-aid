@@ -1,0 +1,60 @@
+{% extends 'store/base.html' %}
+
+{% block content %}
+
+
+
+<div class="container ">
+    <div class="p-3 m-3 ">
+        <div class="col-lg-5 mx-auto border rounded pt-5 p-4 m-4 bg-danger">
+            <h3 class="alert alert-light text-light border rounded text-center bg-dark">Customer Registration</h3>
+
+            <form action="" method="POST">
+                {% csrf_token %}
+                 <!--User Name-->
+                 <div class="form-group pt-2 ">
+                    <label for="fname" class="text-light">User Name:</label>
+                    {{form.username}}   
+                  </div>
+
+                 <!--First Name-->
+                 <div class="form-group pt-2 ">
+                    <label for="fname" class="text-light">First Name:</label>
+                    {{form.first_name}}  
+                  </div>
+
+
+                <!--Last name-->
+                 <div class="form-group pt-2 ">
+                    <label for="lname" class="text-light">Last Name:</label>
+                    {{form.last_name}}  
+                  </div>
+
+                <!--email-->
+                <div class="form-group pt-2 ">
+                  <label for="email" class="text-light">Email:</label>
+                  {{form.email}}   
+                </div>
+
+                 <!--password1-->
+                 <div class="form-group pt-2 ">
+                    <label for="phone" class="text-light">Password:</label>
+                    {{form.password1}}    
+                  </div>
+                  <!--password1-->
+                  <div class="form-group pt-2 ">
+                    <label for="address" class="text-light">Confirm Password:</label>
+                    {{form.password2}} 
+                  </div>
+                 
+                  
+                  <!--Submit-->
+                  <div class="form-group pt-3 mx-auto d-grid gap-2 ">
+                    <input type="submit" class="btn   btn-warning btn-outline-info text-dark" value="Create An Account">
+                  </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

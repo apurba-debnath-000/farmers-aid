@@ -1,0 +1,286 @@
+{% load static %}
+{% load crispy_forms_tags %}
+{% load cart %}
+<!doctype html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+
+    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"> -->
+
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css'%}">
+    <!--<link rel="stylesheet" href="{% static 'css/owl.carousel.min.css'%}">
+    <link rel="stylesheet" href="{% static 'css/owl.theme.default.min.css'%}">-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css"
+          integrity="sha512-tS3S5qG0BlhnQROyJXvNjeEM4UpMXHrQfTGmbQ1gKmelCxlSEBUaxhRBj/EFTzpbP4RVSrpEikbmdJobCvhE3g=="
+          crossorigin="anonymous" referrerpolicy="no-referrer"/>
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css"
+          integrity="sha512-sMXtMNL1zRzolHYKEujM2AqCLUR9F2C4/05cdbxjjLSRvMQIciEPCQZo++nk7go3BtSuK9kfa/s+a4f4i5pLkw=="
+          crossorigin="anonymous" referrerpolicy="no-referrer"/>
+
+    {% block weather_css %}
+
+    {% endblock %}
+
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
+
+    <title>farmersAid(digital solution for farmer)</title>
+    <style>
+
+    body{
+      
+      /* background-image:url('{{ STATIC_URL }}picture/krishok.png'); */
+      /* background-image:url('{% static "picture/krishok.png" %}');  */
+      background: rgba(3, 109, 3, 0.3) /* Green background with 30% opacity */;
+      background-repeat:no-repeat;
+      /* background-size:1380px 900px; */
+      
+      /* background-image: url('{% static "picture/a.png"%}'); */
+    }
+
+
+@media screen and (min-width: 980px){
+    .nav-item:hover{
+        padding-left: 2px;
+        background:rgb(32, 23, 23);
+        transition: all 400ms ease-in-out;
+    }
+}
+
+@media screen and(min-width: 400px){
+    .dropdown-item{
+        margin-left: 2rem;
+    }
+    .drop:hover{
+        
+        background:rgb(53, 28, 28);
+        transition: all 400ms ease-in-out;
+    }
+
+   
+
+    
+}
+/* .drop-item:hover{
+        
+        background:rgb(53, 28, 28);
+        transition: all 400ms ease-in-out;
+    } */
+
+
+
+
+    </style>
+</head>
+
+<body>
+<!--Navbar-->
+<nav class="navbar navbar-expand-lg navbar-light "
+     style="background-color: rgb(212, 230, 215); color:rgb(245, 245, 237); ">
+
+
+    <div class="container-fluid" style="background:rgb(53, 66, 45); ">
+        <a class="navbar-brand text-light" href="/">farmersAid</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent"
+             style="background:rgb(95, 116, 83);  position: relative;z-index: 1000;">
+
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0" style="color:white;">
+
+                <li class="nav-item" >
+                    <a class="nav-link active text-light" aria-current="page" href="/">Shop</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active text-light" aria-current="page" href="{% url 'home_Blog' %}">Blog</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active text-light" aria-current="page"
+                       href="{% url 'WeatherApp:city_weather' %}">Weather</a>
+                </li>
+
+
+            </ul>
+
+            {% if request.user.is_authenticated %}
+
+            <div class="d-flex text-light">
+                Welcome:<span>--></span>
+                &nbsp;
+                {{request.user.username}} &nbsp; ||
+            </div>
+
+            {% endif %}
+
+
+            <ul class="navbar-nav my-2 my-lg-0">
+
+                <li class="nav-item">
+                    <a class="nav-link active text-light" aria-current="page" href="{% url 'cart' %}">Cart
+                        <span class="badge bg-info">{{request.session.cart.keys|length}}</span>
+                    </a>
+                </li>
+                {% if not request.session.current_user_id %}
+
+                  <!--subnavitem-->
+                  <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle text-light" href="#" id="navbarDropdownMenuLink" role="button"
+                       data-bs-toggle="dropdown" aria-expanded="false">
+                        SignUp
+                    </a>
+                    <ul class="dropdown-menu resdrop"  style="margin-left: -3.65rem; background:rgb(137, 182, 111);">
+                        <li class="drop">
+                            <a class="dropdown-item " 
+                            style=" display: inline-block;  color: rgb(39, 39, 31);" href="{% url 'cus_reg' %}">
+                                Register As Customer
+                            </a>
+                        </li>
+
+                        <li class="drop"><a class="dropdown-item text-dark" href="{% url 'fa_reg' %}">Register As Farmaer</a></li>
+
+                        <li class="drop"><a class="dropdown-item text-dark" href="{% url 'agri_officer_reg' %}">Register As Agri_Officer</a></li>
+                    </ul>
+                </li>
+                <!--subnavitem-->
+
+                <li class="nav-item">
+                    <a class="nav-link active text-light" aria-current="page" href="{% url 'login' %}">Login</a>
+                </li>
+
+              
+                {% else %}
+
+                <li class="nav-item">
+                    <a class="nav-link text-light" href="{% url 'profile' %}">Profile</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link active text-light" aria-current="page" href="{% url 'order_page' %}">Order</a>
+                </li>
+
+
+                <li class="nav-item">
+                    <a class="nav-link text-light" href="{% url 'logout' %}">Logout</a>
+                </li>
+
+
+                {% endif %}
+
+            </ul>
+
+
+        </div>
+    </div>
+</nav>
+<!--CLOSE nAV-->
+
+<!--Block here-->
+{% block content %}
+
+
+{% endblock %}
+<!--close block-->
+
+   <!--fOOTER-->
+
+{% include 'store/footer.html' %}
+          
+   
+   <!--fOOTER-->
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous">
+</script>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"
+        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous">
+</script>
+
+
+<script>
+      M.AutoInit();
+  
+
+
+
+
+
+
+
+</script>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"
+        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+<!--<script src="{% static 'js/owl.carousel.min.js'%}"></script>-->
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"
+        integrity="sha512-bPs7Ae6pVvhOSiIcyUClR7/q2OAsRiovw4vAkX+zJbw3ShAeeqezq50RIIcIURq7Oa20rW2n2q+fyXBNcU9lrw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer">
+</script>
+
+
+<script>
+      $(document).ready(function(){
+    $(".owl-carousel").owlCarousel(
+    {
+      loop: true,
+  
+        autoplay: true,
+  
+        nav: false,
+        responsiveClass: true,
+      responsive:{
+          0:{
+              items:1,
+              nav:true
+          },
+          600:{
+              items:3,
+              nav:false
+          },
+          1000:{
+              items:3,
+              nav:true,
+              loop:false
+          }
+      }
+  
+    }
+    );
+  });
+  
+  
+
+      $(document).ready(function(){
+        $(".owl-carousel").owlCarousel();
+      });
+
+
+
+
+
+
+
+</script>
+
+</body>
+</html>

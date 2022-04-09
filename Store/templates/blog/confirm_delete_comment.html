@@ -1,0 +1,56 @@
+{% extends 'store/base.html' %}
+
+{% block content %}
+
+
+
+<style>
+    label{
+        font-size: 16px;
+        color: rgb(8, 2, 1);
+        font-weight: bold;
+    }
+</style>
+
+<h3 style="margin-left: 45px; margin-bottom: 70px;">Delete Comment :</h3>
+<!--<hr style="margin-left: 40px; margin-bottom: 70px; width: 400px;">-->
+<div class="container-custom mt-3">
+    <div class="row mx-auto" style="width: 80%; ">
+       
+        <div class="form-group">
+            <form action="" method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                <h4>Are you sure? You want to delete this comment?</h4>
+                
+                <div class="row">
+                    <div class="col-lg-6" style="width: 100px; float: right;">
+                        <h1>
+                            <a href="{% url 'show_blogs'%}" 
+                            style="color: rgb(232, 234, 235); 
+                            width: 190px;
+                             background-color: rgb(6, 121, 58); 
+                             height: 36px;  
+                             font-size: 14px; " 
+                             class="btn" > 
+                             NO, Take Me Back 
+                            </a>
+                          </h1>
+                    </div>
+                  
+  
+                 <div class="col-lg-6" style="float: right; margin-left: 100px; margin-top: 31px; ">
+                  <button class="btn btn-outline-info" 
+                  style=" width: 190px; margin-bottom: 20px; 
+                  margin-top: 36px; 
+                  background-color: red; font-size: 14px; text-align: center;"> 
+                      <p style="text-align: center;">YES, I'M SURE</p>
+                   </button>
+                 </div>
+                </div>
+            </form>
+        </div>
+        
+    </div>
+</div>
+
+{% endblock %}

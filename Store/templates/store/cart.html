@@ -1,0 +1,168 @@
+{% extends 'store/base.html' %}
+{% block content %}
+{% load cart %}
+{% load custom_filter %}
+<div class="container">
+<!--jaVASCRIPT-->
+
+
+
+<!---sCRIPT-->
+
+<!--message -->    
+{% if messages %}  
+  <id id="products" class="col-lg-9 col-sm-9 mx-auto">
+
+    <class class="row mx-auto">
+
+        <class class="alert alert-warning alert-dismissible fade show" role="alert">
+
+            <!--message code-->
+            
+            <div class="notification-container">
+                <div class="notification">
+
+                {% for message in messages %}
+                <p {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</p>
+                {% endfor %}
+
+                </div>
+            </div>
+
+            
+
+            <!--end message code-->
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </class>
+    </class>
+</id>
+{% endif %}
+<!--message end-->
+    <div class="border rounded p-4 m-4 " style="background-color: rgb(226, 238, 245);">
+        <p class="display-4 pl-4 ml-4">Your Cart:</p>
+        <hr>
+        <table class="table-primary">
+            <thead>
+                <tr>
+                    <th>Sno.</th>
+                    <th>Image</th>
+                    <th>Name</th>
+                    <th>Price</th>
+                    <th>Quantity</th>
+                    <th>Total</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for p in products %}
+                <tr>
+                
+                    <td>{{forloop.counter}}</td>
+                    <td>
+
+                    <img src="{{p.image.url}}" alt="" style=" width:30px; height:30px; " >
+
+                    </td>
+                    <td> {{p.name}} </td>
+                    <td> {{p.Unit_price|currency}} / {{p.unit}} </td>
+                    
+                    <td>{{p|cart_quantity:request.session.cart}}</td>
+                    <td>
+                        <span style="font-size: 18px; color:darkred">
+                            {{p|total_price:request.session.cart|currency}}
+                        </span>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+            <tfoot>
+                
+                <tr>
+                    <th colspan="4"></th>
+                    <th colspan="" >Total: </th>
+                    <th ><span style="font-size: 18px; color:darkred">{{products|cart_total_price:request.session.cart|currency}}</th></span>
+                </tr>
+              
+            </tfoot>
+        </table>
+        {% if  not request.user.is_authenticated %}
+
+        <div class="m-3 p-3 ">
+            <a href="{% url 'return_login' %}" class="btn btn-outline-info border rounder col-lg-3 " style="float: right;" >Checkout</a>
+        </div>
+        {% else %}
+        <div class="m-3 p-3 ">
+            <a href="" class="btn btn-outline-info border rounder col-lg-3 " style="float: right;" data-bs-toggle="modal" data-bs-target="#exampleModal">Checkout</a>
+        </div>
+        <!--modal-->
+        {% endif %}
+        
+    </div>
+</div>
+
+
+<!--Modal conditions: -->
+{% if request.session.cart.keys|length == 0 %}
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="p-3 m-3">
+ 
+          <h1 style="font-size: 23px; color:red; font-family: 'Courier New', Courier, monospace;">Sorry! You didn't add any item to cart yet! </h1>
+        </div>
+      </div>
+     
+    </div>
+  </div>
+</div>
+
+{% else %}
+<!-- Modal -->
+
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Checkout Form: </h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="p-3 m-3">
+          <form action="/check-out" method="POST">
+          {% csrf_token %}
+
+            <div class="form-group">
+              <label for="">Address</label>
+              <input type="text" name="address" id="" class="form-control" placeholder="Address" aria-describedby="helpId" required>
+              
+            </div>
+            <div class="form-group">
+              <label for="">Email</label>
+              <input type="email" name="email" id="" class="form-control" placeholder="xyz@email.com" aria-describedby="helpId" required>
+              
+            </div>
+            <div class="form-group">
+              <label for="">Phone</label>
+              <input type="text" name="phone" id="id_phone" class="form-control" placeholder="017-00000000" aria-describedby="helpId" pattern="[0][1-9][2-9][0-9]{8}" title="ex:-017-000-000-00" required>
+              
+            </div>
+            <input type="submit" value="Checkout" class="btn btn-outline-info m-3" style="float: right;" onclick="validate()">
+
+          </form>
+
+        </div>
+      </div>
+     
+    </div>
+  </div>
+</div>
+{% endif %}
+
+        
+        
+       
+{% endblock %}

@@ -1,0 +1,48 @@
+{%extends 'store/base.html' %}
+
+{%block title%} Welcome to IBLOGS {%endblock%}
+
+{%block content%}
+<style>
+    body{
+        background-image: url('');
+    }
+</style>
+<div class="container-custom">
+
+    <h3 style="color: rgb(36, 32, 23);">{{cat.title}}</h3>
+    <a href="{% url 'home_Blog' %}" class="btn btn-primary mb-2">Back</a>
+    <div class="img-container">
+        <img src="/abcd/show/{{cat.image}}" class="responsive-img" style="max-height:450px;width:100%;object-fit:cover;"
+             alt="">
+    </div>
+    <br>
+    <div class="collection">
+
+        {%for p in posts %}
+
+        
+
+        
+
+            <a href="/blog/detail/{{p.slug}}" class="collection-item" style="font-weight: bold; color: brown; font-family: 'Courier New', Courier, monospace; font-size: 20px;">{{forloop.counter}}. {{p.title}}
+            </a>
+       
+        
+        
+        {% empty %}
+
+        <div class="div" style="background-color: darkslategrey; width: 100%; height: 90px;">
+            <h3 style="color: rgb(199, 240, 16); margin-top: 16px;">
+                No posts in this category
+            </h3>
+        </div>
+
+        {%endfor%}
+
+    </div>
+
+
+</div>
+
+{%endblock%}

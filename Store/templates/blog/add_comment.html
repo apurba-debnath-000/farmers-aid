@@ -1,0 +1,44 @@
+{% extends "store/base.html" %}
+
+{% block content %}
+
+<style>
+    body{
+        background-image: url('');
+    }
+</style>
+<section>
+    <div class="container">
+       
+        <div class="row  mt-2" >
+           <h2>Add Comment</h2>
+
+           <div class="form-group">
+
+               <form action="" method="POST">
+                   {% csrf_token %}
+                   {{form.as_p}}
+                   <button class="btn btn-outline-info"> 
+                       Add Comment
+                    </button>
+               </form>
+           </div>
+
+        </div>
+        {% for comment in object_list %}
+        <strong>
+            {{comment.name}} -
+            {{comment.date_added}}
+        </strong>
+        <br>
+        {{comment.body}}
+        <br><br>
+       
+    {% endfor %}
+    <hr>
+    </div>
+</section>
+
+
+
+{% endblock %}

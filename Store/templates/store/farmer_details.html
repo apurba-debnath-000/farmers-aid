@@ -1,0 +1,58 @@
+{% extends 'store/base.html' %}
+
+
+{% block content %}
+<!--      Loading template tags -->
+{% load cart %}
+
+{% load custom_filter %}
+<div class="container-fluid " style="margin-left: 50px;">
+    
+    <div class="row mx-auto">
+       <div class="col-lg-12 bg-dark" style="margin-top: 30px; width:1218px; margin-left: 0px;">
+        <h5 style="text-align: center; color: whitesmoke;
+        font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif; 
+        ">Farmar's Informations </h5>
+       </div>
+        <div class="col-5 col-lg-5 col-sm-12 "  style="color:whitesmoke; background-color: rgb(248, 248, 231);">
+            <img src=" {{object.userprofile.image.url}}" alt="Image" height="300px" width="350px" style="margin:auto; margin-top: 18px; margin-left: 85px; border: 3px solid rgb(41, 43, 39); "><hr>
+            <div class="col-lg-12" style="padding:7px; background-color: rgb(15, 14, 13); width: 100%;">
+                <p style="font-size: 20px; margin-top: 5px; margin-left: 150px; ">---{{user.get_full_name}}---</p>
+            </div>
+            <hr>
+        </div>
+        <div class="col-8 col-lg-8 col-sm-12  " style="height: 680px;  width: 50%; color:rgb(29, 7, 7); background-color: rgb(233, 233, 159);">
+            <h5 style="font-size: 20px; font-family: Verdana, Geneva, Tahoma, sans-serif; margin-left: -1px;">{{ user.get_full_name }}</h5>
+<hr>
+<!-- <form action="" method="POST" enctype="multipart/form-data"> -->
+            <ul style="list-style: none; ">
+
+               <!-- <li>First Name: {{object.FirstName}}</li>
+               <li>Last Name: {{object.LastName}}</li> -->
+               <li style="margin-top: 10px; "><strong>Name:</strong>  {{object.get_full_name}}</li>
+               
+               <li style="margin-top: 10px; "><strong>Phone:</strong> {{object.userprofile.phone}}</li>
+               <li style="margin-top: 10px; "><strong>Email:</strong>   {{object.email}}</li>
+               <li style="margin-top: 10px; "><strong>Address: </strong>  {{object.userprofile.address}}</li>
+               <li style="margin-top: 10px; "><strong>National ID:</strong> 
+            
+               <div class="col-lg-12">
+                <img src=" {{object.userprofile.national_id.url}}" alt="Image" width="470px" height="230px"  style="margin:auto; margin-top: 10px; margin-left: 10px;">
+               </div>
+               <hr>
+            </li>
+               <div style="margin-top: 13px;">
+                   <strong >Some words from Farmer: </strong><p>Feel free to contact with me, to order my products, You will get your desire product as fresh as possible and also in low cost. </p>
+                </div>
+            </ul>
+            
+<!-- </form> -->
+        </div>
+            
+        
+        </div>
+    </div>
+   
+</div>
+
+{% endblock %}

@@ -1,0 +1,77 @@
+{% extends 'store/base.html' %}
+
+{% load widget_tweaks %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+<style>
+    label{
+        color: black;
+    }
+
+</style>
+
+<div class="container-fuild " >
+    <div class="p-3 m-3 " >
+        <div class="col-lg-5  mx-auto border rounded pt-5 p-4 m-4 " style="background-color: rgb(144, 247, 182); width: 900px; color:black;
+        height: 1400px;">
+            <div class="col-lg-12 " style="background-color: teal; height: 200px;">
+
+                <img 
+                src="" alt=""
+                class="" style="height: 150px; margin-top: 40px;">
+
+                <a 
+                href="https://www.freeiconspng.com/img/47794" title="Image from freeiconspng.com"><img src="https://www.freeiconspng.com/uploads/experience-image-clip-art-job-skill--20.png" 
+                    
+                    alt="Experience Image Clip art Job Skill " style="height:160px; width: 160px; margin-left: 330px; margin-top: 25px;"
+                 />
+                
+                </a>
+            </div>
+            <h6 class="alert alert-light text-light border rounded text-center bg-dark">Agriculture Officer Registration</h6>
+            
+            <!-- {% if register %}
+            <h3>Welcome!! Registration Successful.</h3>
+            {% else %} -->
+
+            <!-- {% if error %}
+            <h3>{{error}}</h3>
+            {% endif %} -->
+
+
+
+
+            
+<form action="" method="POST" enctype="multipart/form-data" style="font-weight: bold; color: black;">
+    {% csrf_token %}
+   <div class="row text-light">
+       <div class="col-lg-6 text-light">
+        <fieldset class="form-group text-dark " >
+            {{ profile_form|crispy }}
+        </fieldset>
+       </div>
+    
+        <div class="col-lg-6">
+            <fieldset class="form-group text-dark " >
+                {{ Info_Profile_form|crispy }}
+            </fieldset>
+        </div>
+   </div>
+    
+    <!-- {% if profile_form.errors %}
+        <div class="alert alert-danger">
+            {{ profile_form.errors }}
+        </div>
+    {% endif %} -->
+
+    <div class="form-group pl-3 pr-3 text-light">    
+        <button class="btn btn-info btn-sm mb-3" style="width:200px; float: right; margin-right: 80px;" type="submit">Submit</button>
+    </div>
+</form>
+        </div>
+    </div>
+</div>
+<!-- {% endif %} -->
+
+{% endblock %}

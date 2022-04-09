@@ -1,0 +1,73 @@
+{% extends "store/base.html" %}
+
+{% block content %}
+{% load custom_filter %}
+
+
+<div class="col-lg-12">
+    <h2 style="margin-left: 40px; color: crimson; margin-bottom: 20px;"> All Posts: </h2>
+    
+  
+    <table class="table border">
+        {% if request.user|has_group:"Agri_officer" or request.user.is_superuser %}
+        <tr >
+            <td >
+                <div class="col-lg-12" >
+                    
+                    <button class="btn btn-outline-info"  ><a href="{% url 'add_blog' %}" style="color: white; text-align: center;" >ADD BLOG</a>
+                    </button>
+                    
+                </div>
+            </td>
+        </tr>
+        {% endif %}
+        {% for blog in blogs %}
+        <tr>
+           
+            <td>
+                <div class="col-lg-6" style="background-color: rgb(126, 9, 58); height: 32px; width: 50px; margin-left: 20px; ">
+
+                    <h5 style="color:rgb(235, 221, 224); text-align: center; margin-top: 5px; ">
+
+                        {{forloop.counter}}
+
+                    </h5>
+                </div>
+            </td>
+            <td >
+                 
+                <div class="btn btn-outline-info col-lg-9 m-3 "   >
+                    <a href="{% url 'blog_detail' blog.slug %}" style="color: aliceblue;">{{blog.title}}</a>     
+                  </div>
+            </td>
+            {% if request.user|has_group:"Agri_officer" or request.user.is_superuser %}
+            <td>
+                 
+                <div class="btn btn-outline-info col-lg-12 m-3 " >
+                    
+                    <a href="{% url 'update_blog' blog.pk %}" style="color: aliceblue;">Edit Blog</a>  
+                      
+                  </div>
+                  
+            </td>
+            {% endif %} 
+
+            {% if request.user|has_group:"Agri_officer" or request.user.is_superuser %}
+            <td>
+                
+                <div class="btn btn-outline-info col-lg-9 m-3 " style="background-color: crimson; margin-right: -20px;" >
+                    <a href="{% url 'delete_blog' blog.pk %}" style="color: aliceblue;">Delete Blog</a>     
+                  </div>
+                
+            </td>
+            {% endif %}
+           
+        </tr>
+        {% endfor %}
+    </table>
+    
+    
+</div>
+
+
+{% endblock %}
