@@ -1,0 +1,116 @@
+{% extends 'store/base.html' %}
+
+
+{% block content %}
+<!--      Loading template tags -->
+{% load cart %}
+
+{% load custom_filter %}
+<style>
+    
+    nav li{
+        margin-bottom: 0px;
+    }
+    li{
+        margin-bottom: 10px;
+        
+    }
+</style>
+<div class="container-fluid " >
+    <div class="row mt-4 mx-auto" >
+        {% if messages %}
+        <class class="row mx-auto">
+
+            <class class="alert alert-warning alert-dismissible fade show" role="alert">
+    
+                <!--message code-->
+                
+                <div class="notification-container">
+                    <div class="notification">
+    
+                    {% for message in messages %}
+                    <p {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</p>
+                    {% endfor %}
+    
+                    </div>
+                </div>
+    
+                
+    
+                <!--end message code-->
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </class>
+        </class>
+        {% endif %}
+    </div>
+    <div class="row mx-auto" >
+        <div class="col-lg-12 " >
+            <h5 class="display-4 ">{{user.first_name}}'s Profile </h5>
+        </div>
+
+        
+       {% for d in data %}
+        <div class="col-5 col-lg-5 col-sm-12 " style="background-color: rgb(189, 235, 121);  margin-left: 30px;">
+            
+            <img src="{{d.image.url}}" alt=" upload Image" height="300px" width="350px" style="margin-left:80px; margin-top: 10px; border:3px solid greenyellow; border-radius: 20%;">
+            
+            <hr>
+            <div class="col-lg-12 p-2  text-light" style="background-color: rgb(14, 1, 1);">
+                <h5 style="font-size: 20px;  margin-left: 140px;">{{d.user.get_full_name}}</h5>
+            </div>
+            <hr>
+        </div>
+
+        <div class="col-8 col-lg-8 col-sm-12 bg-light" style="height: 680px;  width: 52%; " >
+            <!-- <div class="col-lg-12 mt-3" style="background-color: rgb(19, 18, 17); padding: 14px; color: aliceblue;">
+                <h6 style="font-size: 20px; font-family: Verdana, Geneva, Tahoma, sans-serif; margin-left: -1px; ">{{d.user.get_full_name}}</h6>
+            </div> -->
+
+<hr>
+            <ul >
+
+                <li><strong>UserID: {{d.user.id}}</strong></li>
+                <li><strong>User Name: </strong>{{d.user}}</li>
+                <li><strong>Address: </strong>{{d.address}}</li>
+                <li><strong>Phone: </strong> <b>{{d.phone}}</b></li>
+                <li><strong>Email: </strong>{{d.user.email}}</li>
+                <li><strong>National Id No: </strong> <b>{{d.national_id_no}}</b></li>
+                <li>
+                    <strong>National Id: </strong>
+                    <div class="col-lg-12">
+
+                        <img src=" {{d.national_id.url}}" alt="Image" style="max-height: 250px; max-width:100%; margin:auto; margin-top: 10px; ">
+                    </div>
+                    <hr style="color:red">
+                </li>
+                <li>
+
+                    <a href="{% url 'edit_profile_info' %}">
+                        <button type="button" class="btn btn-outline-info">
+                            Profile Settings
+                        </button>
+                    </a>
+                </li>
+                <li></li>
+            </ul>
+
+        </div>
+            
+        <div>
+                <!-- <ul style="list-style: none;">
+                    
+                    <li><strong>Price: </strong>Tk 100</li>
+                    <li><strong>Discont:</strong> 0%</li>
+                    <li><strong>Stock Availablity: </strong>Available</li>
+                    <li></li>
+                </ul> --> 
+             </div>
+    </div>
+</div>
+   
+</div>
+
+
+
+{% endfor %}
+{% endblock %}

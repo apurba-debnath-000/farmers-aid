@@ -15,11 +15,11 @@
 
     <class class="row mx-auto">
 
-        <class class="alert alert-warning alert-dismissible fade show" role="alert">
+        <class class="alert mt-4 alert-warning alert-dismissible fade show" role="alert">
 
             <!--message code-->
             
-            <div class="notification-container">
+            <div class="notification-container ">
                 <div class="notification">
 
                 {% for message in messages %}
@@ -38,10 +38,12 @@
 </id>
 {% endif %}
 <!--message end-->
-    <div class="border rounded p-4 m-4 " style="background-color: rgb(226, 238, 245);">
-        <p class="display-4 pl-4 ml-4">Your Cart:</p>
+    <div class="border rounded p-4 m-4 table-responsive " style="background-color: rgb(226, 238, 245);">
+        <h3 class="display-4  text-primary">Your Cart</h3>
         <hr>
-        <table class="table-primary">
+
+
+        <table class=" table mt-4 table-striped table-hover table-primary">
             <thead>
                 <tr>
                     <th>Sno.</th>
@@ -59,7 +61,7 @@
                     <td>{{forloop.counter}}</td>
                     <td>
 
-                    <img src="{{p.image.url}}" alt="" style=" width:30px; height:30px; " >
+                    <img class="rounded-circle" src="{{p.image.url}}" alt="" style=" width:60px; height:60px; " >
 
                     </td>
                     <td> {{p.name}} </td>
@@ -84,6 +86,7 @@
               
             </tfoot>
         </table>
+
         {% if  not request.user.is_authenticated %}
 
         <div class="m-3 p-3 ">

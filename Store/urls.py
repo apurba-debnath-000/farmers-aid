@@ -10,6 +10,7 @@ from .middlewares.auth import auth_middleware
 from django.contrib.auth import views as auth_views
 urlpatterns = [
     
+   
     path('', views.index, name='home'),
     path('customer_reg', views.customer_reg, name="cus_reg"),
     path('farmer_registration', views.farmer_reg, name = 'fa_reg'),

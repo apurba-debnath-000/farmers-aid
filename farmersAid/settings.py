@@ -18,7 +18,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = [
 
-    #'127.0.0.1',
+    '127.0.0.1',
     
     # 'farmersaids30.herokuapp.com'
     # 'farmers-aids.herokuapp.com'
@@ -139,6 +139,7 @@ MEDIA_URL = '/abcd/show/'
 MEDIA_ROOT = BASE_DIR
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+# STATICFILES_DIRS = [os.path.join(BASE_DIR,'Store/static'),]
 #STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
@@ -146,14 +147,13 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
-
 #Email Backend Code:
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_USE_TLS = True
 EMAIL_PORT = 587
 EMAIL_HOST_USER = 'farmers.solution001@gmail.com'
-EMAIL_HOST_PASSWORD = 'farmer001'
+EMAIL_HOST_PASSWORD = 'uhpettporilybolw' #farmer001 --main password
 
 # # Activate Django-Heroku.
 # django_heroku.settings(locals())

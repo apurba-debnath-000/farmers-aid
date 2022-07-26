@@ -5,6 +5,7 @@
 <!--      Loading template tags -->
 <style>
     
+    
     @media screen and(min-width: 400px){
     .cat{
         margin-top:20px;
@@ -14,222 +15,301 @@
 {% load cart %}
 
 
-<div class="container-fluid mt-3">
-    <div class="row">
-<!--Category filter-->
-<div class="col-lg-3 col-sm-3 mx-auto cat">
-    <div class="list-group " >
-        <a id='cross' href="/"      class="list-group-item list-group-item-action " style="background-color: rgb(137, 182, 111);color: whitesmoke;">
-            All Products</a>
-        {% for category in categories %}
+{% load custom_filter %}
 
-        <a id='cross' href="/?category_id={{category.id}}"      class="list-group-item list-group-item-action " style="background-color: rgb(7, 82, 57); color: whitesmoke;">
-            {{category.name}}</a>
 
+
+<div class="container-fluid my-0 bg-dark">
+    <div class="row ">
+        <marquee scrolldelay="100" behavior="alternate" direction=""><h2 class="display-2 text-light text-uppercase ">
+                Farmer's Shop
+                
+        </h2>
+        <p class="lead text-light font-weight-bolder text-uppercase text-center ">30% discount upto 50kg </p>
         
+</marquee>
+       
 
-        {% endfor %}
     </div>
-</div>
-<!-- end Category filter-->
-
-
-
-<!--Products showing-->
-    <div id="products" class="col-lg-9" >
-<!--message -->    
-{% if messages %}  
-  <id id="products" class="col-lg-9 col-sm-9 mx-auto">
-
-    <class class="row mx-auto">
-
-        <class class="alert alert-warning alert-dismissible fade show" role="alert">
-
-            <!--message code-->
+    <div class="row ">
+        <div class="col-lg-12 ">
             
-            <div class="notification-container">
-                <div class="notification">
+            <p class="lead text-primary font-weight-bolder text-uppercase text-center mt-5" style="font-size:36px; font-family: sans-serif;">100% Organic product from local Farmers </p>
+            
+          
+           
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+                <h3 class="display-4 my-5 text-center text-primary text-uppercase" id="love">Our Shop</h3>
+                <!--Full section of prdocut-->
+                <div class="container-fluid mt-4">
+                        <div class="row">
+                    <!--Category filter-->
+                    <div class="col-lg-3 col-sm-3 mx-auto cat">
+                        <div class="list-group " >
+                            <a id='cross' href="/"      class="list-group-item list-group-item-action " 
+                            style="background-color: rgb(28, 13, 64);color: rgb(247, 236, 236); padding: 20px;"
+                            >
+                                All Products</a>
+                            {% for category in categories %}
+                    
+                            <a  href="/?category_id={{category.id}}"      class="list-group-item list-group-item-action active" style="background-color: rgb(101, 63, 167); color: whitesmoke; padding: 15px; 
+                            
+                            ">
+                                {{category.name}}
+                            
+                            </a>
+                    
+                            
+                    
+                            {% endfor %}
+                        </div>
+                    </div>
+                    <!-- end Category filter-->
+                    
+                    
+                    
+                    <!--Products showing-->
+                        <div id="products" class="col-lg-9" >
+                    <!--message -->    
+                    {% if messages %}  
+                      <id id="products" class="col-lg-9 col-sm-9 mx-auto">
+                    
+                        <class class="row mx-auto">
+                    
+                            <class class="alert alert-warning alert-dismissible fade show" role="alert">
+                    
+                                <!--message code-->
+                                
+                                <div class="notification-container">
+                                    <div class="notification">
+                    
+                                    {% for message in messages %}
+                                    <p {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</p>
+                                    {% endfor %}
+                    
+                                    </div>
+                                </div>
+                    
+                                
+                    
+                                <!--end message code-->
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            </class>
+                        </class>
+                    </id>
+                    {% endif %}
+                    <!--message end-->
+                    
+                             <!--Products div -->
+                                    <div class="row mx-auto">
+                                        <!--Looping products on this div-->
+                                            {% for product in products %}
+                                                <div class="card rounded mx-auto mb-3 text-light" class="card_all"
+                                                style=" width: 20rem; 
+                                                background:rgb(48, 7, 115);" id="{{product.id}}">
+                    
+                    
+                                                    <div class="col-lg-12 col-sm-12" style="height:200px;  width: auto">
+                                                        <img  src="{{product.image.url}}" class="card-img-top responsive-img mt-2 p-2 img-fluid img-thumbnail "  alt="picture" style="height: 200px;">
+                                                    </div>
+                    
+                                                    <div class="card-body">
+                                                    <p class="card-title ">{{product.name}}</p>
+                                                    <p class="card-title"><span>Price:&nbsp; </span>{{product.Unit_price}}<b style="font-size:25px; color: rgb(43, 43, 37);">৳</b><span> /{{product.unit}}</span></p>
+                                                    {% if product.quantity == 0 %}
+                                                    <p class="small text-light">Stock: <span class="text-info lead"><mark class="text-danger">{{product.quantity}}</mark>{{product.unit}}</span> </p>
+                                                    {% else %}
 
-                {% for message in messages %}
-                <p {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</p>
-                {% endfor %}
+                                                    <p class="small text-light">Stock: <span class="text-warning lead">{{product.quantity}}{{product.unit}}</span> </p>
 
+                                                    {% endif %}
+                                                    <p class="card-text truncate">{{product.description| truncatewords:10}}</p>
+                    
+                                                        <!-- View product button -->
+                                                    <a href="{% url 'productDetails' product.id %}" class="btn btn-light border btn-sm btn-block form-control" style="margin-bottom: 7px;">View Product</a>
+                    
+                                                        <!--Cart code: To send data to server as form codes below:-->
+                    
+                                                    <div class="card-footer p-0 no-gutters">
+                    
+                                                {% if product|is_in_cart:request.session.cart %}
+                    
+                                                    {% for i in products.paginator.page_range %}
+                                                        {% if i == products.number %}
+                    
+                                                       
+                                                                                                                                    <!--minus er form-->
+                                                        
+                                                        {% endif %}
+                    
+                                                    {% endfor %}
+                                                     
+                                                    <div class="row no-gutters p-0 m-0" >
+                    
+                                                        <form action="/?page={{i}}#{{product.id}}" method="POST" class="col-1 p-0 mr-2">
+                                                            {% csrf_token %}
+                                                            <input type="text" name="product" value="{{product.id}}" hidden>
+                    
+                                                            <input type="text" name="remove" value="True" hidden>
+                    
+                                                            <button type="submit" class=" btn btn-block btn-success">-</button>
+                                                        
+                                                        
+                                    </form>
+                                                           <!--center value-->
+                                                            <div class="col text-center">
+                                                                {{product|cart_quantity:request.session.cart}} in cart
+                                                            </div>
+                    
+                    
+                                                            <!--plus er form-->
+                                                    <form action="/?page={{i}}#{{product.id}}" method="POST" class="formElement col-2 p-0 ml-3" sty>
+                                                    {% csrf_token %}
+                                                    <input type="text" name="product" value="{{product.id}}" hidden >
+                                                    {% if product.quantity == product|cart_quantity:request.session.cart %}
+
+                                                    <button type="submit" class=" btn btn-block btn-success" style="margin-left: -6px;" disabled>
+                                                        +
+                                                    </button>
+                                                    {% else %}
+
+                                                    <button type="submit" class=" btn btn-block btn-success" style="margin-left: -6px;" >
+                                                        +
+                                                    </button>
+                                                    {% endif %} 
+                                                    </form>
+                                                            
+                                                            
+                                                    </div>
+                    
+                                                    {% else %}
+                                                        <!--Add to cart form-->
+                                                    <form action="/?page={{i}}#{{product.id}}" method="POST" class="formElement btn-block ">
+                                                    {% csrf_token %}
+                                                    <input type="text" name="product" value="{{product.id}}" hidden>
+                                                    {% if product.quantity == 0 %}
+                                                    <input type="submit"  class="btn btn-light border btn-sm  form-control float-right disabled"  value="Add To Cart">
+                                                    {% else %}
+                                                    <input type="submit"  class="btn btn-light border btn-sm  form-control float-right "  value="Add To Cart">
+                                                    {% endif %}        
+                                                    </form>
+                                                        
+                                                    {% endif %}
+                                                    </div>
+                                                    </div>    
+                                                </div>
+                                            {% endfor %}   
+                                    </div>
+                            <!--productsdiv end-->
+                    
+                                  <div class="row">
+                                      
+                                      <div class="col-lg-12 col-sm-12">
+                                            <!--Paginator -->
+                                            <nav aria-label="..." class="mb-5 " style="background-color: rgb(34, 107, 101);">
+                                                <ul class="pagination m-5">
+                                                    {% if products.has_previous %}
+                                                    <li class="page-item ">
+                                                        <a class="page-link" href="?page={{ products.previous_page_number }}">Previous</a>
+                                                    </li>
+                                                
+                                                    {% else %}
+                                                    <li class="page-item disabled">
+                                                        <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
+                                                    </li>
+                                                
+                                                    {% endif %}
+                                                    
+                                                    {% for i in products.paginator.page_range %}
+                                                
+                                                    {% if i == products.number %}
+                                                    <li class="page-item active">
+                                                        <a class="page-link" href="?page={{i}}">{{i}}
+                    
+                                                        </a>
+                                                    </li>
+                                                    {% else %}
+                                                
+                                                    <li class="page-item">
+                                                        <a class="page-link" href="?page={{i}}">{{i}}</a>
+                                                    </li>
+                                                    {% endif %}
+                                                
+                                                
+                                                    {% endfor %}
+                                                
+                                                
+                                                    {% if products.has_next %}
+                                                    <li class="page-item ">
+                                                        <a class="page-link" href="?page={{ products.next_page_number }}">Next</a>
+                                                    </li>
+                                                
+                                                    {% else %}
+                                                    <li class="page-item disabled">
+                                                        <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Next</a>
+                                                    </li>
+                                                
+                                                    {% endif %}
+                                                
+                                                
+                                                    
+                                                </ul>
+                                            </nav>  
+                                            <!--End pagination-->
+                    
+                                      </div> 
+                                  </div>   
+                    
+                    <!--end products-->
+                        </div>    
+                       
+                    </div>
                 </div>
+    </div>
+    <div class="row  my-2 ">
+            <h2 class="display-4 text-center my-4 text-primary text-uppercase"> Services</h2>
+    </div>
+
+    <div class="row p-3 ">
+            <div class="col-lg-4 ">
+                    <div class=" blockquote text-center text-light p-3 bg-primary">
+                            <i class="fa-3x fas fa-user-circle text-center "></i>
+                            <h3 class="display-4 text-uppercase">Farmers </h3>
+                            <p class="small text-light ">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Natus placeat eveniet alias commodi tempore. Perspiciatis, laborum. Fugit tempore veritatis facilis, cupiditate placeat reprehenderit officiis facere libero accusamus dignissimos necessitatibus sapiente.</p>
+                            <footer class="blockquote-footer text-light">
+                                    Youtbe here <cite>Youtube</cite>
+                                 <abbr title="World health org.">WHO</abbr>
+                            </footer>
+                    </div>
+            </div>
+            <div class="col-lg-4 ">
+                    <div class=" blockquote text-light text-center bg-success p-3">
+                            <i class="fa-3x  fas fa-user-circle text-center"></i>
+                            <h3 class="display-4 text-uppercase">Clients</h3>
+                            <p class="small text-light">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Natus placeat eveniet alias commodi tempore. Perspiciatis, laborum. Fugit tempore veritatis facilis, cupiditate placeat reprehenderit officiis facere libero accusamus dignissimos necessitatibus sapiente.</p>
+                            <footer class="blockquote-footer text-light">
+                                    Youtbe here <cite>Youtube</cite>
+                                 <abbr title="World health org.">WHO</abbr>
+                            </footer>
+                    </div>
+            </div>
+            <div class="col-lg-4 ">
+                    <div class=" blockquote p-3 text-center bg-primary text-light ">
+                            <i class="fa-3x fas fa-user-circle text-center"></i>
+                            <h3 class="display-4 text-uppercase">Agri. Officers </h3>
+                            <p class="small text-light">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Natus placeat eveniet alias commodi tempore. Perspiciatis, laborum. Fugit tempore veritatis facilis, cupiditate placeat reprehenderit officiis facere libero accusamus dignissimos necessitatibus sapiente.</p>
+                            <footer class="blockquote-footer text-light">
+                                    Youtbe here <cite>Youtube</cite>
+                                 <abbr title="World health org.">WHO</abbr>
+                            </footer>
+                    </div>
             </div>
 
-            
-
-            <!--end message code-->
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </class>
-    </class>
-</id>
-{% endif %}
-<!--message end-->
-
-         <!--Products div -->
-                <div class="row mx-auto">
-                    <!--Looping products on this div-->
-                        {% for product in products %}
-                            <div class="card mx-auto mb-3 text-light" class="card_all"
-                            style=" width: 18rem; background:rgb(7, 82, 57);" id="{{product.id}}">
-
-
-                                <div class="col-lg-12 col-sm-12" style="height:200px;  width: auto">
-                                    <img src="{{product.image.url}}" class="card-img-top responsive-img mt-2 p-2"  alt="picture" style="height: 200px;">
-                                </div>
-
-                                <div class="card-body">
-                                <p class="card-title">{{product.name}}</p>
-                                <p class="card-title"><span>Price:&nbsp; </span>{{product.Unit_price}}<b style="font-size:25px; color: rgb(43, 43, 37);">৳</b><span> /{{product.unit}}</span></p>
-                                <p class="card-text truncate">{{product.description| truncatewords:10}}</p>
-
-                                    <!-- View product button -->
-                                <a href="{% url 'productDetails' product.id %}" class="btn btn-light border btn-sm btn-block form-control" style="margin-bottom: 7px;">View Product</a>
-
-                                    <!--Cart code: To send data to server as form codes below:-->
-
-                                <div class="card-footer p-0 no-gutters">
-
-                            {% if product|is_in_cart:request.session.cart %}
-
-                                {% for i in products.paginator.page_range %}
-                                    {% if i == products.number %}
-
-                                   
-                                                                                                                <!--minus er form-->
-                   
-                                    
-                                    
-                                    {% endif %}
-
-                                {% endfor %}
-                                 
-                                <div class="row no-gutters p-0 m-0" >
-
-                                    <form action="/?page={{i}}#{{product.id}}" method="POST" class="col-1 p-0 mr-2">
-                                        {% csrf_token %}
-                                        <input type="text" name="product" value="{{product.id}}" hidden>
-
-                                        <input type="text" name="remove" value="True" hidden>
-
-                                        <button type="submit" class=" btn btn-block btn-success">-</button>
-                                    
-                                    
-                </form>
-                                       <!--center value-->
-                                        <div class="col text-center">
-                                            {{product|cart_quantity:request.session.cart}} in cart
-                                        </div>
-
-
-                                        <!--plus er form-->
-                                <form action="/?page={{i}}#{{product.id}}" method="POST" class="formElement col-2 p-0 ml-3" sty>
-                                {% csrf_token %}
-                                <input type="text" name="product" value="{{product.id}}" hidden >
-
-                                <button type="submit" class=" btn btn-block btn-success" style="margin-left: -6px;">
-                                    +
-                                </button>
-                                    
-                                </form>
-                                        
-                                        
-                                </div>
-
-                                {% else %}
-                                    <!--Add to cart form-->
-                                <form action="/?page={{i}}#{{product.id}}" method="POST" class="formElement btn-block ">
-                                {% csrf_token %}
-                                <input type="text" name="product" value="{{product.id}}" hidden>
-    
-                                <input type="submit"  class="btn btn-light border btn-sm  form-control float-right"  value="Add To Cart">
-                                        
-                                </form>
-                                    
-                                {% endif %}
-                                </div>
-                                </div>    
-                            </div>
-                        {% endfor %}   
-                </div>
-                <!--productsdiv end-->
-
-              <div class="row ">
-                  
-                  <div class="col-lg-12 col-sm-12">
-                        <!--Paginator -->
-                        <nav aria-label="..." class="mb-5 " style="background-color: rgb(146, 223, 216);">
-                            <ul class="pagination m-5">
-                                {% if products.has_previous %}
-                                <li class="page-item ">
-                                    <a class="page-link" href="?page={{ products.previous_page_number }}">Previous</a>
-                                </li>
-                            
-                                {% else %}
-                                <li class="page-item disabled">
-                                    <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
-                                </li>
-                            
-                                {% endif %}
-                                
-                                {% for i in products.paginator.page_range %}
-                            
-                                {% if i == products.number %}
-                                <li class="page-item active">
-                                    <a class="page-link" href="?page={{i}}">{{i}}
-
-                                    </a>
-                                </li>
-                                {% else %}
-                            
-                                <li class="page-item">
-                                    <a class="page-link" href="?page={{i}}">{{i}}</a>
-                                </li>
-                                {% endif %}
-                            
-                            
-                                {% endfor %}
-                            
-                            
-                                {% if products.has_next %}
-                                <li class="page-item ">
-                                    <a class="page-link" href="?page={{ products.next_page_number }}">Next</a>
-                                </li>
-                            
-                                {% else %}
-                                <li class="page-item disabled">
-                                    <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Next</a>
-                                </li>
-                            
-                                {% endif %}
-                            
-                            
-                                
-                            </ul>
-                        </nav>  
-                            <!--End pagination-->
-
-                  </div> 
-              </div>   
-
-<!--end products-->
-    </div>    
-   
+           
+    </div>
 </div>
 
-
-<!-- <script>
-    let url = window.location.href
-    let split = url.split("?")
-    let formElemnt = document.querySelectorAll('.formElement')
-    if(split[1]){
-        formElemnt.forEach(obj=>{
-            let  oldActionUrl  = obj.getAttribute("action")
-            let newActionUrl = "?"+split[1]+oldActionUrl
-            obj.action=newActionUrl
-            console.log(oldActionUrl, newActionUrl)
-        })
-    }
-</script> -->
 {% endblock %}

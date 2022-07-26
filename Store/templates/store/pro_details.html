@@ -2,181 +2,99 @@
 
 
 {% block content %}
+
+
 <!--      Loading template tags -->
 {% load cart %}
 
 {% load custom_filter %}
-<style>
 
-    li{
-        line-height: 1.5em;
-        
-    }
-</style>
-<div class="container-fluid  mt-3">
-
-    <div class="row mx-auto" style="margin-left: 40px;">
-       
-        <div class="col-lg-12 bg-dark" style="margin-top: 30px; width:1218px; margin-left: 48px;">
-            <h5 style="text-align: center; color: whitesmoke;
-            font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif; 
-            ">Product's Informations </h5>
-           </div>
-
-
-
-        <div class="col-5 col-lg-5 col-sm-12  "  style="background-color: antiquewhite; margin-left: 50px;">
-
-           <div class="col-lg-12" style="width: 400px; height: 350px;  margin-left: 60px; border: 1px solid rgb(70, 26, 26); margin-top:20px ; border-style: outset;">
-
-            <img src="{{object.image.url}}" alt="Image" style="width: 398px; height: 348px; ">
-
-           </div>
-            
-            <hr>
-            <div class="col-lg-12 bg-dark p-3" style="margin-top: 20px;">
-                <h5 style="font-size: 20px;  margin-left: 140px;  color: rgb(241, 228, 228);">{{object.name}}</h5>
+    <div class="container-fluid bg-dark text-center line-height-3 m-0">
+        <div class="row  ">
+            <div class="col-lg-12 col-sm-12 ">
+                <h4 class="display-4  text-center text-primary text-uppercase">Product's Details</h4>
             </div>
-            <hr>
         </div>
-
-        <div class="col-8 col-lg-8 col-sm-12 bg-light " style="height: 680px;  width: 50%; ">
-            <div class="col-lg-12 mt-3" style="background-color: rgb(150, 104, 47); padding: 14px;" >
-                <p style="font-size: 20px; font-family: Verdana, Geneva, Tahoma, sans-serif; margin-left: -1px; color: whitesmoke; margin-top: 10px;" >{{object.name}}</p>
-            </div>
-
-<hr>
-            <ul style="list-style: none; ">
-                <li style="margin-top:10px;">
-                    <strong style="font-size: 19px;">Status:</strong>
-                    <b class="badge bg-info" style="font-size: 18px; color: black;;">
-                    -->Active
-                    </b>
-                </li>
-                <li style="margin-top:10px;">
-                    <strong style="font-size: 19px;">Price: </strong>
-                    <b class=""style="  font-size: 19px; color: black;">
-                    --> {{object.Unit_price|currency}}/{{object.unit}}
-                    </b>
-                </li>
-                <li style="margin-top:10px;">
-                    <strong style="font-size: 19px;">Discount:</strong>
-                    <b class="" style="color: black; font-size: 19px;">
-                        --> 0%
-                    </b>
-                </li>
-                <li style="margin-top:10px;">
-                    <strong style="font-size: 19px;">Stock:</strong>
-                    <b class="badge bg-info" style="color: black; font-size: 19px;">
-                    --> {{object.quantity}} {{object.unit}}
-                    </b>
-                </li>
-                <li style="margin-top:10px;"><strong style="font-size: 19px;">Stock Availablity: </strong><b class="badge bg-info" style="color: black; font-size: 19px;">--> {{object.quantity|available}}</b></li>
-                <li> <input type="text" name="" id=""></li>
-                <li>
-                    <!--Add to cart-->
-                    <div class="card-footer p-0 no-gutters">
-
-                        {% if product|is_in_cart:request.session.cart %}
-
-                        <div class="row no-gutters p-0 m-0" >
-                            <!--minus er form-->
-                            <form action="/#{{product.id}}" method="POST" class="col-1 p-0 mr-2">
-                                {% csrf_token %}
-                                <input type="text" name="product" value="{{product.id}}" hidden>
-
-                                <input type="text" name="remove" value="True" hidden>
-
-                                <button type="submit" class=" btn btn-block btn-success" >-</button>
-                            
-                            </form>
-                           <!--center value-->
-                            <div class="col text-center">
-                                <b style="color: black; font-size: 18px; margin-top: 2px;">{{product|cart_quantity:request.session.cart}} in cart</b>
-                            </div>
-                            <!--plus er form-->
-                        <form action="/#{{product.id}}" method="POST" class="formElement col-2 p-0 ml-3" sty>
-                            {% csrf_token %}
-                            <input type="text" name="product" value="{{product.id}}" hidden>
-                            <button
-                             type="submit" class=" btn btn-block btn-success" style="margin-left:66px;" >
-                        +
-                    </button>
-                        
-                        </form>
-                            
-                            
-                        </div>
-
-                        {% else %}
-
-                        <!--Add to cart form-->
-                        <form action="/#{{product.id}}" method="POST" class="formElement btn-block ">
-                            {% csrf_token %}
-                            <input type="text" name="product" 
-                            value="{{product.id}}" hidden>
-
-                            <button type="submit"  class="btn btn-light border btn-sm  form-control float-right"  value="" >Add To Cart</button>
-                            
-                        </form>
-
-                        {% endif %}
-                       
-
-
-                    </div>
-                    <hr>
-
-                </li>
-                <li>
-                <strong style="font-size: 23px;">Product Description: </strong>
-                    <p style="font-family: sans-serif;"> {{object.description}}
-                    </p>
+        <div class="row bg-secondary py-5 mt-0">
+            <div class="col-lg-6 col-sm-12 ">
                 
-                </li>
-                <hr>
-
-                <li><strong>Krishok Name: </strong>
-                    
-                    <div class="row mt-3">
-                        <div class="col-lg-3  ">
-                            
-                            <img src="{{object.krishok.userprofile.image.url}}" alt="picture" style="max-height:50px; max-width:50%;  margin-left: 80px;" class="rounded ">
-                        </div>
-                        <div class="col-lg-8">
-
-                        <form action="" method="POST">
-                            {% csrf_token %}
-    
-                                <button type="submit" class="btn btn-outline-success mt-2">
-                                    
-        
-                                    <a href="{% url 'farmerDetails' object.krishok.id %}" style="color: black;">{{object.krishok.username}}</a>
-                                    
-            
-                                </button> 
-                            </form>
-                        </div>
-
-                    </div>
-                   
-                </li>
-            </ul>
-
-        </div>
-            
-        <div>
-                <!-- <ul style="list-style: none;">
-                    
-                    <li><strong>Price: </strong>Tk 100</li>
-                    <li><strong>Discont:</strong> 0%</li>
-                    <li><strong>Stock Availablity: </strong>Available</li>
-                    <li></li>
-                </ul> -->
+                <img class="  d-block mx-auto img-thumbnail my-4 my-lg-5 rounded-circle img-fluid" src="{{object.image.url}}" alt="Image" height="400px" width="500px">
             </div>
+            <div class=" col-sm-12 col-lg-6 text-center bg-dark">
+                <p class="display-4 text-white mt-4">{{object.name}}</p>
+                <hr>
+                <table class=" small table table-bordered table-hover mt-3 text-center table-primary p-3">
+                    <thead>
+                        <tr>
+                            <th>Status</th>
+                            <th>Price</th>
+                            <th>Stock Availablity</th>
+                            <th>Stcok Unit</th>
+                            <th>Discount</th>
+                            <th>Farmer's Name:</th>
+                        </tr>
+
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Active</td>
+                            <td>{{object.Unit_price|currency}}/{{object.unit}}</td>
+                            <td>{{object.quantity|available}}</td>
+                            <td>{{object.quantity}} {{object.unit}}</td>
+                            <td>0%</td>
+                            <td>{{object.krishok.username}}</td>
+                        </tr>
+                    </tbody>
+
+                </table>
+
+               <h4 class=" mt-5  text-white text-uppercase" style="font-family:  Montserrat;">Product Description:</h4>
+               <p class="lead mt-2 text-light">{{object.description}}</p>
+
+               <div class="row mt-5 text-light p-3">
+                <div class="col-lg-6">
+                    <p class=" text-light  text-left" style="font-size: 26px; margin-top: 89px; font-family:  Arial, Helvetica, sans-serif; font-weight: 200;"> Go to Farmar Details :  </p>
+                </div>
+                <div class="col-lg-6">
+                    <img src="{{object.krishok.userprofile.image.url}}" alt="picture" style="max-height:80px; max-width:50%; " class="rounded-circle img-fluid  ">
+                    <form action="" method="POST" class="form-control bg-dark mt-2">
+                        {% csrf_token %}
+
+                            <button type="submit" class="btn btn-outline-success ">
+                                
+    
+                                <a href="{% url 'farmerDetails' object.krishok.id %}" style="color: black;">{{object.krishok.username}}</a>
+                                
+        
+                            </button> 
+                    </form>
+                </div>
+               </div>
+            </div>
+        </div>
+
+        <div class="row bg-dark text-light">
+            
+                <div class=container">
+                    <h4 class="display-4 my-3  text-uppercase">Farmer Details: </h4>
+                    <h6 class=" p-3 mb-2 text-uppercase">Name: {{object.krishok.username}} </h6>
+                    <p class="text-muted text-info ">Lorem ipsum dolor sit amet consectetur adipisicing elit. Sed aliquid ullam repellendus perferendis beatae sequi iste eius a, molestiae at est pariatur veniam distinctio neque necessitatibus praesentium aperiam tempore, minus soluta quisquam ab alias odio rem incidunt? Commodi, itaque magnam!
+
+                    </p>
+                    
+                        
+                        <img src="{{object.krishok.userprofile.image.url}}" alt="picture" style="max-height:380px; " class="rounded img-fluid img-thumbnail my-4">
+                    
+                </div>
+           
         </div>
     </div>
-   
-</div>
+
+
+
+
+
+
+
 
 {% endblock %}

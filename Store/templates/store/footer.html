@@ -8,40 +8,72 @@
     
   
   }
-  .container{
-    
-  }
+  
 </style>
-<div class="page-footer" style="background:rgb(95, 116, 83); ">
+<div class="page-footer" style="background:rgb(46, 13, 113); ">
     <div class="container"  >
       <div class="row">
         <div class="col l6 s12">
-          <h5 class=" text-lighten-4" style="font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; font-style: italic; font-size: 50px;">farmersAid</h5>
-          <h6 class="white-text " style="margin-top: 29px; font-size: 20px; ">One Digital Solution for Helping Farmers</h6>
+          <h5 class=" text-lighten-4 display-2" >farmerShop</h5>
+          <p class="text-light lead " >One Digital Solution for Helping Farmers</p>
         </div>
         <div class="col l4 offset-l2 s12">
           <h5 class="text-white" style="font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; font-style: italic;">All Links :</h5>
 
           <ul>
-            <li style="margin-top: 10px; margin-left: 20px;"><a class=" white-text" href="/">Shop</a></li>
-            <li style="margin-top: 10px; margin-left: 20px;"><a class=" white-text" href="{% url 'cart' %}">Cart</a></li>
-            <li style="margin-top: 10px;  margin-left: 20px;"><a class=" white-text" href="{% url 'home_Blog' %}">Blog</a></li>
-            <li style="margin-top: 10px;  margin-left: 20px;"><a class=" white-text" href="{% url 'WeatherApp:city_weather' %}">Weather Info</a></li>
-            <li style="margin-top: 10px;  margin-left: 20px;"><a class="white-text text-lighten-3" href="{% url 'profile' %}">Profile</a></li>
+            <li style="margin-top: 10px; margin-left: 20px;"><a class=" white-text" href="/">
+              <span><i class="fa-1x p-2 mt-3 fa-solid fa-shop float-right text-light"></i></span>
+              Shop</a></li>
+            <li style="margin-top: 10px; margin-left: 20px;"><a class=" white-text" href="{% url 'cart' %}">
+              <span><i class="fa-1x p-2 mt-3 fa-solid fa-cart-plus float-right text-light"></i>
+                                
+              </span>
+              Cart</a></li>
+            <li style="margin-top: 10px;  margin-left: 20px;"><a class=" white-text" href="{% url 'home_Blog' %}">
+              <span><i class="fa-1x p-2 mt-3 fa-solid fa-hand-holding-hand float-right text-light"></i></span>
+              
+              Blog</a></li>
+            <li style="margin-top: 10px;  margin-left: 20px;"><a class=" white-text" href="{% url 'WeatherApp:city_weather' %}">
+              <span><i class="fa-1x p-2 mt-3 fa-solid fa-cloud float-right text-light"></i></span>
+              
+              Weather Info</a></li>
+            <li style="margin-top: 10px;  margin-left: 20px;"><a class="white-text text-lighten-3" href="{% url 'profile' %}">
+              
+              <span>
+                <i class="fa-1x p-2 mt-3 fa-solid fa-user float-right text-light">
+                  
+                </i>
+                                
+              </span>
+              Profile</a></li>
           </ul>
         </div>
       </div>
     </div>
+
     <div class="footer-copyright">
       <div class="container" >
-      © 2021 Copyright eKrishok
+      © 2021 Copyright farmerShop
       {% if request.user.is_authenticated %}
-      <a class="white-text text-lighten-4 right" href="{% url 'logout' %}" style="margin-left: 20px;">Logout</a>
-      <a class="white-text text-lighten-4 right" href="{% url 'order_page' %}">Orders</a>
+      <a class="white-text text-lighten-4 right" href="{% url 'logout' %}" style="margin-left: 20px;">
+        <span><i class="fa-1x p-2 mt-3 fa-solid fa-inbox-out float-right text-light"></i>
+        
+        Logout</a>
+      <a class="white-text text-lighten-4 right" href="{% url 'order_page' %}">
+        <span><i class="fa-1x p-2 mt-3 fa-solid fa-arrow-down-a-z float-right text-light"></i>
+        
+        Orders</a>
       {% else %}
-      <a class="white-text text-lighten-4 right " style="margin-left: 19px;" href="{% url 'login' %}"> Login</a>
+      <a class="white-text text-lighten-4 right " style="margin-left: 19px;" href="{% url 'login' %}"> 
+        
+        <span><i class="fa-1x p-2 mt-3 fa-solid fa-arrow-down-a-z float-right text-light"></i>
+        
+        Login</a>
       
-      <a class="white-text text-lighten-4 right" href="{% url 'type_Sign' %}">SignUp</a>
+      <a class="white-text text-lighten-4 right" href="{% url 'type_Sign' %}">
+        <span><i class="fa-1x p-2 mt-3 fa-solid fa-user-plus text-light"></i>
+        
+        SignUp</a>
       {% endif %}
       </div>
     </div>

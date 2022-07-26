@@ -50,29 +50,50 @@
 </style>
 <!--html-->
 <div class="container rounded bg-white mt-5 mb-5">
-    <form action="" method="POST" enctype="multipart/form-data">
-        {% csrf_token %}
-        <div class="row " style="width: 900px; height: auto;">
-            <div class="col-md-3 border-right">
-                <div class="d-flex flex-column align-items-center text-center p-3 py-5"><img class="rounded-circle mt-5" width="150px" src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg"><span class="font-weight-bold">{{user}}</span><span class="text-black-50"><b>{{user.email}}</b></span><span> </span></div>
-            </div>
-               
-               <div class="col-lg-4  m-3 p-4"  style="">
-                {{u_form.as_p}}
-               </div>
-              
-               <div class="col-lg-4 m-3 p-4 " style="">
-               
+    <div class="row">
+        <div class="col-lg-12">
+            <form action="" method="POST"  enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="row " style="width: 900px; height: auto;">
+                    <div class="col-lg-3 col-md-3 border-right">
+                        
+                        <div class="d-flex flex-column align-items-center text-center p-3 py-5">
 
-                {{p_form.as_p}}
+                            <img class="rounded-circle img-fluid  mt-5" width="150px" src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg"
+                            >
 
-                <button type="submit" class="btn btn-outline-info " style="width: 150px; float: right; margin-top: 30px;">Update Info</button>
-               </div>
-                
-              
-           
+
+
+                           
+
+                <span class="font-weight-bold">
+                    {{user}}
+                </span>
+
+                <span class="text-black-50">
+                    {{user.email}}
+                </span>
+                        </div>
+                    </div>
+                       
+                       <div class="col-md-5 border-right"  >
+                        {{u_form.as_p}}
+                       </div>
+                      
+                       <div class="col-md-4 ">
+                        {{p_form.as_p}}
+
+                        <button type="submit" class="btn btn-outline-info " style="width: 150px; float: right; margin-top: 30px;">
+                            Update Info
+                        </button>
+                       </div>
+                        
+                      
+                   
+                </div>
+            </form>
+        </div>
     </div>
-    </form>
 </div>
 
 

@@ -65,6 +65,10 @@ from django.urls import reverse_lazy
     #     return render(request, 'store/index.html', data)
 
 #@login_required(login_url='/login/')
+#--------Index---Home--------
+def index1(request):
+    return render(request, 'store/index.html')
+
 def index(request):
     #Before serving index page clearing cart dict obj.
     cart = request.session.get('cart')

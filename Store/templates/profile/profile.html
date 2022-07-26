@@ -7,105 +7,69 @@
 
 {% load custom_filter %}
 <style>
-    
-    nav li{
-        margin-bottom: 0px;
-    }
     li{
-        margin-bottom: 10px;
-        
+        margin-top: 12px;
     }
 </style>
-<div class="container-fluid " >
-    <div class="row mx-auto" >
-        {% if messages %}
-        <class class="row mx-auto">
+<div class="container-fluid bg-primary ">
+    
 
-            <class class="alert alert-warning alert-dismissible fade show" role="alert">
-    
-                <!--message code-->
-                
-                <div class="notification-container">
-                    <div class="notification">
-    
-                    {% for message in messages %}
-                    <p {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</p>
-                    {% endfor %}
-    
-                    </div>
-                </div>
-    
-                
-    
-                <!--end message code-->
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </class>
-        </class>
-        {% endif %}
-    </div>
-    <div class="row mx-auto" >
-        <div class="col-lg-12 bg-dark" style="margin-top: 30px; width:1245px; margin-left: 30px;">
-            <h5 style="text-align: center; color: whitesmoke;
-            font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif; 
-            ">{{user.first_name}}'s Profile </h5>
-           </div>
-       {% for d in data %}
-        <div class="col-5 col-lg-5 col-sm-12 " style="background-color: rgb(189, 235, 121);  margin-left: 30px;">
-            <img src="{{d.image.url}}" alt="Image" height="300px" width="350px" style="margin-left:80px; margin-top: 10px; border:3px solid greenyellow; border-radius: 20%;">
-            <hr>
-            <div class="col-lg-12 p-2  text-light" style="background-color: rgb(14, 1, 1);">
-                <h5 style="font-size: 20px;  margin-left: 140px;">{{d.user.get_full_name}}</h5>
-            </div>
-            <hr>
+
+    {% for d in data %}
+    <div class="row bg-dark mt-3">
+        <div class="col-lg-12 bg-dark  p-3">
+            <a href="{% url 'edit_profile_info' %}">
+                <button type="button" class="btn btn-outline-info ">
+                    <i class="  fa-2x fa-solid fa-screwdriver-wrench"></i>
+                    Profile Settings
+                </button>
+            </a>
         </div>
+    </div>
+    <div class="row">
+        
+        <div class="col-lg-4 p-5 bg-primary text-light mt-5">
+            
+             <img class="img-fluid mt-2 img-thumbnail d-block mx-auto rounded-circle" src="{{d.image.url}}" alt="Uplaod an image" style="height: 150px; width: 150px;">
+             <h2 class="display-4 text-uppercase text-center" style="font-size: 34px;">{{user.get_full_name}}</h2>
+        </div>
+        <div class="col-lg-4 p-5 bg-primary text-light mt-5">
+            <h3 class="display-4 text-uppercase text-center" style="font-size: 24px; font-weight: 400;">
+                <i class="fa-solid fa-address-card"></i>
+                Information
+            </h3>
+            <ul class="text-center ">
 
-        <div class="col-8 col-lg-8 col-sm-12 bg-light" style="height: 680px;  width: 52%; " >
-            <!-- <div class="col-lg-12 mt-3" style="background-color: rgb(19, 18, 17); padding: 14px; color: aliceblue;">
-                <h6 style="font-size: 20px; font-family: Verdana, Geneva, Tahoma, sans-serif; margin-left: -1px; ">{{d.user.get_full_name}}</h6>
-            </div> -->
+                <li><strong class="lead">
+                    
+                    UserID: {{d.user.id}}</strong>
+                </li>
+                <li><strong class="lead">User Name: {{d.user}}</strong></li>
+                <li><strong class="lead">Address: {{d.address}} </strong></li>
+                <li><strong class="lead">Phone: {{d.phone}}</strong> <b></b></li>
+                <li><strong class="lead">Email: {{d.user.email}}</strong></li>
+                
+               
+            </ul>
+             
+        </div>
+        <div class="col-lg-4 p-5 bg-primary text-light mt-5">
 
-<hr>
-            <ul >
-
-                <li><strong>UserID: {{d.user.id}}</strong></li>
-                <li><strong>User Name: </strong>{{d.user}}</li>
-                <li><strong>Address: </strong>{{d.address}}</li>
-                <li><strong>Phone: </strong> <b>{{d.phone}}</b></li>
-                <li><strong>Email: </strong>{{d.user.email}}</li>
-                <li><strong>National Id No: </strong> <b>{{d.national_id_no}}</b></li>
-                <li>
-                    <strong>National Id: </strong>
+            <strong class="lead">National Id No: {{d.national_id_no}}</strong> 
+                
+                    <strong class="lead text-center">National Id Image: </strong>
                     <div class="col-lg-12">
 
-                        <img src=" {{d.national_id.url}}" alt="Image" style="max-height: 250px; max-width:100%; margin:auto; margin-top: 10px; ">
+                        <img class="img-thumbnail d-block mx-auto img-fluid rounded bg-info" src=" {{d.national_id.url}}" alt="Image" style="max-height: 250px; width: 400px; margin:auto; margin-top: 15px; ">
                     </div>
-                    <hr style="color:red">
-                </li>
-                <li>
-
-                    <a href="{% url 'edit_profile_info' %}">
-                        <button type="button" class="btn btn-outline-info">
-                            Profile Settings
-                        </button>
-                    </a>
-                </li>
-                <li></li>
-            </ul>
-
-        </div>
-            
-        <div>
-                <!-- <ul style="list-style: none;">
                     
-                    <li><strong>Price: </strong>Tk 100</li>
-                    <li><strong>Discont:</strong> 0%</li>
-                    <li><strong>Stock Availablity: </strong>Available</li>
-                    <li></li>
-                </ul> --> 
-             </div>
+                
+            
+            
         </div>
-</div>
-   
+
+    </div>
+
 </div>
 
 

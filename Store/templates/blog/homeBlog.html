@@ -3,19 +3,19 @@
 
 {% block content %}
 
-<div class="container-custom mt-3">
-  <h3 style="margin-bottom: 20px; margin-left: 12px; color: rgb(16, 2, 34);">Blog Categories: </h3>
+<div class="container-custom mt-3 ">
+  <h3 class="display-4 text-center text-uppercase">Blog Categories </h3>
 
   <!-- Set up your HTML -->
-  <div class="owl-carousel">
+  <div class="owl-carousel ">
 
    
 
       {% for cat in cats %}
 
-      <div class="card item" style="margin-left:10px;">
+      <div class="card item bg-dark" style="margin-left:10px;">
 
-          <div class="img-container">
+          <div class="img-container img-fluid ">
 
               <img src="/abcd/show/{{cat.image}}" class="responsive-img " alt="" height="300" width="300">
 
@@ -23,10 +23,10 @@
           <div class="card-content">
 
               <div class="card-title m-3">
-                  <p style="font-size: large; color: rgb(235, 115, 60); font-family: Georgia, 'Times New Roman', Times, serif;">( {{cat.title}} )</p>
+                  <p style="font-size: large; color: rgb(246, 231, 224); font-family: Georgia, 'Times New Roman', Times, serif;">( {{cat.title}} )</p>
               </div>
 
-              <p class="truncate m-3">{{cat.description|safe}}</p>
+              <p class="truncate m-3 text-light">{{cat.description|safe}}</p>
               <div class="container center-align mt20">
                   <a href="/blog/category/{{cat.url}}" class="btn bg-primary m-3">VIEW</a>
               </div>
@@ -42,8 +42,8 @@
 
   <div class="col-lg-12">
     
-      <button class="btn btn-outline-info" style="margin-right:45px; float: right;">
-        <a href="{% url 'show_blogs'%}" style="color:white">Show Blogs</a>
+      <button class="btn btn-outline-info" style="margin-right:55px; float: right;">
+        <a href="{% url 'show_blogs'%}" style="color:rgb(244, 243, 246)">Show Blogs</a>
       </button>
   </div>
 </div>
@@ -51,7 +51,7 @@
 <div class="container-fluid mt-5">
   <div class="row">
 <!--Category filter-->
-          <h3 style="margin-bottom: 20px; margin-left: 35px; color: rgb(12, 7, 27);">All Blog Posts: </h3>
+          <h3 class="display-4 text-dark text-uppercase text-center">All Blog Posts: </h3>
           
           <hr style="margin-left: 35px; width: 1240px;">
           <div id="blogs" class="col-lg-12" >
@@ -62,20 +62,20 @@
          <div class="row mx-auto">
           
             {% for blog in blogs %}
-                  <div class="card mx-auto mb-3" style="width: 18rem;">
+                  <div class="card mx-auto mb-3 text-light bg-dark" style="width: 18rem;">
                     <a href="{% url 'blog_detail' blog.slug %}">
 
-                      <div class="col-lg-12 col-sm-12" style="height: 220px; width: 220px;   margin-top: 19px; margin: auto;">
-                        <img class="img-fluid card-img-top responsive-img" src="/abcd/show/{{blog.image}}" alt="..." height="220" width="220" style="margin-top:10px"/>
+                      <div class="col-lg-12 col-sm-12 " >
+                        <img class="img-fluid card-img-top responsive-img" src="/abcd/show/{{blog.image}}" alt="..." height="220px"  style="margin-top:10px"/>
                       </div>
                     
                     </a>
 
 
-                      <div class="card-body">
-                      <p class="card-title"><a class="text-dark" href="{% url 'blog_detail' blog.slug %}">{{blog.title | truncatewords:10 | safe}}</a></p>
+                      <div class="card-body ">
+                      <p class="card-title"><a class="" href="{% url 'blog_detail' blog.slug %}">{{blog.title | truncatewords:10 | safe}}</a></p>
                       
-                      <p class="text-gray-500 text-sm my-3"><i class="far fa-clock mr-2"></i>
+                      <p class=" text-sm my-3"><i class="fa-2x far fa-clock mr-2"></i>
                         {{blog.created_at}}</p>
 
                       <!-- <p class="my-2 text-muted text-sm ">
@@ -133,7 +133,7 @@
                   
                   
                       {% if blogs.has_next %}
-                      <li class="page-item ">
+                      <li class="page-item active">
                           <a class="page-link" href="?page={{ blogs.next_page_number }}">Next</a>
                       </li>
                   

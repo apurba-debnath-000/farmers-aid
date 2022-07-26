@@ -2,11 +2,11 @@
 {% block content %}
 {% load cart %}
 {% load custom_filter %}
-<div class="container">
-    <div class="border rounded p-4 m-4" style="background-color: rgb(226, 238, 245);">
-        <p class="display-4 pl-4 ml-4">Your Order:</p>
+<div class="container.fluid">
+    <div class="border rounded p-4 m-4 table-responsive" ">
+        <p class="display-4 text-uppercase text-center">Your Order:</p>
         <hr>
-        <table class="table ">
+        <table class="table table-striped  table-info">
             <thead>
                 <tr>
                     <th>Sno.</th>
@@ -28,7 +28,7 @@
                     <td>{{forloop.counter}}</td>
                     <td>
 
-                    <img src="{{order.product.image.url}}" alt="" style=" width:30px; height:30px; " >
+                    <img src="{{order.product.image.url}}" class="img-fluid img-thumbnail" alt="" style=" width:60px; height:60px; " >
 
                     </td>
                     <td> {{order.product.name}} </td>
