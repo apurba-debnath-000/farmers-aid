@@ -58,19 +58,17 @@
 
 
     /*Csss*/
-
-/* @media screen and (min-width: 980px){
+ @media screen and (min-width: 980px){
     .nav-item:hover{
-        padding-left: 2px;
-        margin-left: 8px;
+        
         background:rgb(32, 23, 23);
         transition: all 400ms ease-in-out;
     }
 }
 
 @media screen and(min-width: 400px){
-    .dropdown-item{
-        margin-left: 2rem;
+    .dropdown-item a{
+        margin-left: 4rem;
 
     }
     .drop:hover{
@@ -82,16 +80,20 @@
    
 
     
-} */
+} 
 /* .drop-item:hover{
         
         background:rgb(53, 28, 28);
         transition: all 400ms ease-in-out;
     } */
 
+    .dropdown-item:hover{
+        background-color: rgb(18, 10, 10);
+    }
 
-
-
+    .nav-item:hover{
+        background-color: rgb(18, 10, 10);
+    }
     </style>
 </head>
 
@@ -193,16 +195,16 @@
                     <ul class="dropdown-menu resdrop"  style="margin-left: -3.65rem; background:rgb(41, 132, 217);">
                         <li class="drop">
                             <a class="dropdown-item " 
-                            style=" display: inline-block;  color: rgb(39, 39, 31);" href="{% url 'cus_reg' %}">
+                            style=" display: inline-block;  color: #fff" href="{% url 'cus_reg' %}">
                                 Register As Customer
                             </a>
                         </li>
 
                         <li class="drop">
-                            <a class="dropdown-item text-dark" href="{% url 'fa_reg' %}" >Register As Farmer</a>
+                            <a class="dropdown-item text-white" href="{% url 'fa_reg' %}" >Register As Farmer</a>
                         </li>
 
-                        <li class="drop d-flex"><a class="dropdown-item text-dark" href="{% url 'agri_officer_reg' %}">Register As Agri_Officer</a></li>
+                        <li class="drop d-flex"><a class="dropdown-item text-white" href="{% url 'agri_officer_reg' %}">Register As Agri_Officer</a></li>
                     </ul>
                 </li>
                 <!--subnavitem-->
