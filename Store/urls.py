@@ -28,6 +28,8 @@ urlpatterns = [
     path('return_login/', views.return_login, name='return_login'),
     path('typeSign', views.typesSign, name='type_Sign'),
     path('order/', auth_middleware(OrderView.as_view()), name='order_page'),
+    path('invoice/', auth_middleware(InvoiceView.as_view(),), name='invoice_page'),
+    
     #path('password/', auth_views.PasswordChangeView.as_view(template_name= 'profile/changePass.html') )
     path('password/', PasswordsChangeView.as_view(template_name= 'profile/changePass.html') ),
     path('password_success/', views.password_success, name="password_success"),

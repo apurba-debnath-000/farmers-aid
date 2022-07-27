@@ -1,18 +1,50 @@
-Hey {{first_name}} {{last_name}}!!
+<h1>Hey {{first_name}} {{last_name}}!!</h1>
 
-Your User_Name: {{username}}
+<h3>Your User Name: {{username}}</h3>
 
-We just want to thank you for purchasing products from us.
+<h4>We just want to thank you for purchasing products from us.</h4>
 
-Your Order details:
+<h2 style="display: inline-block; color:rgb(25, 25, 55); text-align:center;">Your Order details: </h2>
 
-Total:---> {{curr}}
-Order_Total   |  Shipping_address  | Your_Phone_No      | Order_Date
-{{curr}}      |  {{address}}       | {{phone}}          |  {{date}}
+<h3>Total Order's Amount:---> <mark>{{curr}}</mark></h3>
 
-You have ordered total {{curr}} form us. You will get your desired products within 3 days at your given address( {{address}} ) and our service stuff will contact with you at {{phone}}. 
+<table style="border: 1px solid rgb(14, 13, 13);">
+    <thead>
+        <tr>
+            <th>Order_Total</th>
+            <th>Shipping_address </th>
+            <th>Your_Phone_No</th>
+            <th>Order_Date</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>{{curr}}</td>
+            <td>{{address}} </td>
+            <td>{{phone}} </td>
+            <td>{{date}}</td>
 
-Thank you so much for being with us. Looking forward to seeing you there):
+        </tr>
+    </tbody>
+</table>
 
-From,
+<br>
+
+<h4>
+    You have ordered total <mark>{{curr}}</mark> form us. You will get your desired products within <mark><b>3</b></mark> days at your given address( <b>{{address}}</b>) and our service stuff will contact with you at <mark>{{phone}}</mark>.
+</h4> 
+
+<h3 style="color:rgb(44, 4, 78);">
+    Thank you so much for being with us. Looking forward to seeing you there):
+</h3> 
+
+<!-- <a href="{% url 'invoice_page' %}" style="text-decoration: none; padding: 20px; background-color:black; color:white;">Generate Invoice</a> -->
+
+
+<h3 style="font-size:20px">From,
+<br>
 FarmerShop company LTD.
+</h3>
+
+
+

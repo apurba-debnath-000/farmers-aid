@@ -1,3 +1,7 @@
 {{product|is_in_cart:request.session.cart}}
 
 {% if product|is_in_cart:request.session.cart %}
+
+
+note:
+

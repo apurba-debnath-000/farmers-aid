@@ -28,6 +28,7 @@ from .templatetags.custom_filter import *
 from django.contrib import messages
 from .forms2 import *
 from django.urls import reverse_lazy
+from django.core.mail import EmailMessage, EmailMultiAlternatives
 # from django.utils.decorators import method_decorator
 #-----home------
 # class Index(View):
@@ -368,13 +369,14 @@ class Checkout(View):
                             address = address,
                             phone = phone,
                             email = email,
-
                             quantity = cart_products,
                             unit = p.unit
                 )
                 
                 order.save()
                 date = order.date
+                id = order.id
+
                 
                 # print("""
                 # Your order has been saved successfully.
@@ -394,9 +396,11 @@ class Checkout(View):
         # if counter != 0:
         total = cart_total_price(products,cart)
         curr = currency(total)
-        # print("Total price:-->>",total)
-        # print(" curreency : -->>",curr)
 
+        new_order = Order.get_orders_by_user(user)
+        # print(new_order)
+        
+            
         #Email_code:
         context = {
             'first_name': first_name,
@@ -406,43 +410,35 @@ class Checkout(View):
             'date': date,
             'address':address,
             'phone': phone,
+            'date': date,
+            'id':id,
+            'new_order':'orders',
 
 
 
         }
         template = render_to_string('store/email_template.html', context)
-        email = EmailMessage(
-            ' Order Confirmation: from farmer-aids.com, Thanks for purchasing our   products!! ',
+        
+        email = EmailMultiAlternatives(
+            ' Order Confirmation: from farmerShop.com, Thanks for purchasing our   products!! ',
             template,
             settings.EMAIL_HOST_USER,
             [email]
 
 
         )
+        # email.content_subtype = 'html'
+        email.attach_alternative(template, 'text/html')
+        # email.content_subtype = 'css'
+
         email.fail_silenty = False
         email.send()
 
-
-        # subject = 'Order Confirmation:--> eKrishok.com'
-        # message = f'''
-        #     Hello, {username}. You have ordered total : {curr} from eKrishok.com.Your order has taken succesfully , you will get your desire products within 3 days. 
-                    
-                    
-        #             '''
-        # email_from = settings.EMAIL_HOST_USER
-
-        # recipient_list = [email]
-
-        #         #----Sending email-------
-        # send_mail(subject, message, email_from, recipient_list)
-                    # print("All data @--->",address,phone,email,user)
-                    # print('products: ', products, 'cart is: ', cart)
-        
         request.session['cart'] = {}
         messages.error(request, """--
         Your order has placed successfully
-         ----  Thank You for being with us..
-         -----  Please! Chaeck your email as order confirmation...
+         ---Thank You for being with us.--
+         -----Note: Please! Chaeck your email as order confirmation...
 
         --""")
         return redirect('cart' )
@@ -553,6 +549,15 @@ class PasswordsChangeView(PasswordChangeView):
 
 def password_success(request):
     return render(request, 'profile/password_success.html', {})
+
+
+class InvoiceView(View):
+    # @method_decorator(auth_middleware)
+    def get(self, request):
+        user = request.session.get("current_user_id")
+        orders = Order.get_orders_by_user(user)
+        # print(orders)
+        return render(request, 'store/ne_email.html',{"orders":orders} )
 
 
 
