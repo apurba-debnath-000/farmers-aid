@@ -18,7 +18,7 @@ DEBUG = False
 
 ALLOWED_HOSTS = [
 
-    '127.0.0.1',
+    #'127.0.0.1',
     
     'farmer-shop230.herokuapp.com',
     # 'farmers-aids.herokuapp.com'
