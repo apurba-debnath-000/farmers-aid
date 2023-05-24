@@ -19,6 +19,7 @@ DEBUG = True
 ALLOWED_HOSTS = [
 
     '*',
+    'farmers-aid-production.up.railway.app',
     
    
 ]
